@@ -1,0 +1,29 @@
+
+
+<div id="mynetwork" style="height: 500px;"></div>
+ 
+<script >
+var nodeData='{{{temp}}}'
+var EdgeData='{{{Edge}}}'
+console.log(nodeData)
+console.log(EdgeData)
+
+  // create an array with nodes
+  var nodes = new vis.DataSet(JSON.parse(nodeData));
+
+  // create an array with edges
+  var edges = new vis.DataSet(JSON.parse(EdgeData));
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+      autoResize: true,
+  locale: 'en',
+  clickToUse: false,
+  };
+  var network = new vis.Network(container, data, options);
+</script>

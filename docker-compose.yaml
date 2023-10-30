@@ -1,0 +1,39 @@
+#Specifies the version of the Docker Compose file.
+version: "3"
+
+#Defines the services that will be created.
+services:
+  #The name of the service
+  node:
+    #pecifies that the service will be built from the current directory
+    build: .
+
+    #Specifies the name of the container that will be created for the service.
+    container_name: app-container
+
+    #Maps port 4000 on the host machine to port 4000 on the container.
+    ports:
+      - 4000:4000
+
+    #Sets the `NODE_ENV` environment variable to `deployment`.
+    environment:
+      - NODE_ENV=deployment
+
+    #Specifies that the `node` service depends on the `mongodb` service.
+    depends_on:
+      - mongodb
+
+    #Specifies the command that will be executed when the container starts.
+    entrypoint: "node index.js"
+
+  #The name of the service.
+  mongodb:
+    #Specifies the image that will be used to create the container for the service.
+    image: mongo:latest
+
+    #Specifies the name of the container that will be created for the service.
+    container_name: mongo-container
+
+    #Maps port 27017 on the host machine to port 27017 on the container.
+    ports:
+      - 27017:27017
